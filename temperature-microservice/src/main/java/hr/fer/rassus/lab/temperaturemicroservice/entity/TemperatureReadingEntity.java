@@ -5,12 +5,12 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "TEMPERATURE_READING", schema = "TEMPERATURE")
+@Table(name = "temperature_reading")
 public class TemperatureReadingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "VALUE")
-    private Double value;
+    @Column(name = "reading")
+    private Double reading;
 }

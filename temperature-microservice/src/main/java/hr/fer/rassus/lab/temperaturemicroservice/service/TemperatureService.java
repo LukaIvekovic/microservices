@@ -13,17 +13,17 @@ public class TemperatureService {
     private final TemperatureReadingRepository temperatureReadingRepository;
 
     public TemperatureDto getTemperature() {
-        log.debug("Received request for temperature reading.");
+        log.info("Received request for temperature reading.");
 
         int readingId = getCurrentReadingId();
 
-        log.debug("Reading ID: {}", readingId);
+        log.info("Reading ID: {}", readingId);
 
         Double temperatureValue = temperatureReadingRepository.findById(readingId)
-                .map(TemperatureReadingEntity::getValue)
+                .map(TemperatureReadingEntity::getReading)
                 .orElse(null);
 
-        log.debug("Temperature value: {}", temperatureValue);
+        log.info("Temperature value: {}", temperatureValue);
 
         return TemperatureDto.fromValue(temperatureValue);
     }

@@ -13,17 +13,17 @@ public class HumidityService {
     private final HumidityReadingRepository humidityRepository;
 
     public HumidityDto getHumidity() {
-        log.debug("Received request for humidity reading.");
+        log.info("Received request for humidity reading.");
 
         int readingId = getCurrentReadingId();
 
-        log.debug("Reading ID: {}", readingId);
+        log.info("Reading ID: {}", readingId);
 
         Double humidityValue = humidityRepository.findById(readingId)
-                .map(HumidityReadingEntity::getValue)
+                .map(HumidityReadingEntity::getReading)
                 .orElse(null);
 
-        log.debug("Humidity value: {}", humidityValue);
+        log.info("Humidity value: {}", humidityValue);
 
         return HumidityDto.fromValue(humidityValue);
     }

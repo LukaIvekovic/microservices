@@ -37,6 +37,6 @@ public class AggregatorService {
 
         log.debug("Converted temperature from {} to {}: {} -> {}", currentUnit, requiredUnit, currentTemp.value(), convertedValue);
 
-        return new ReadingDto(ReadingType.TEMPERATURE.name(), requiredUnit.getUnit(), convertedValue);
+        return new ReadingDto(ReadingType.TEMPERATURE.getName(), requiredUnit.getUnit(), convertedValue);
     }
 }

@@ -1,0 +1,2 @@
+### Fetch temperature
+GET http://localhost:8080/temperature
