@@ -1,0 +1,44 @@
+Upute za pokretanje:
+
+1. Izgradnja projekata:
+-> U svakom direktoriju (temperature-microservice, humidity-microservice, aggregator-microservice):
+./gradlew clean build
+
+2. Izgradnja Docker slika:
+docker build -t temperature-service:latest temperature-microservice/
+docker build -t humidity-service:latest humidity-microservice/
+docker build -t aggregator-service:latest aggregator-microservice/
+
+3. Primjena Kubernetes konfiguracija redoslijedom:
+kubectl apply -f config/temperature-deployment.yaml
+kubectl apply -f config/temperature-service.yaml
+kubectl apply -f config/humidity-deployment.yaml
+kubectl apply -f config/humidity-service.yaml
+kubectl apply -f config/aggregator-config.yaml
+kubectl apply -f config/aggregator-deployment.yaml
+kubectl apply -f config/aggregator-service.yaml
+
+4. Provjera implementacije:
+kubectl get pods
+kubectl get services
+
+5. Primjer GET zahtjeva za dohvaćanje agregatnih očitanja sa servisa:
+-> Prosljeđivanje porta agregatorskog servisa
+kubectl port-forward service/aggregator-service 8080:80
+
+-> U novom terminalu, slanje GET zahtjeva
+curl http://localhost:8080/readings
+
+Očekivani rezultat:
+[
+    {
+        "name": "Humidity",
+        "unit": "%",
+        "value": 48
+    },
+    {
+        "name": "Temperature",
+        "value": 31,
+        "unit": "C"
+    }
+]
