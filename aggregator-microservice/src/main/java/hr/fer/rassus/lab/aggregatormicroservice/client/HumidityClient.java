@@ -6,6 +6,6 @@ import org.springframework.web.service.annotation.HttpExchange;
 
 @HttpExchange(contentType = "application/json")
 public interface HumidityClient {
-    @GetExchange("/humidity")
+    @GetExchange
     ReadingDto fetchHumidity();
 }
