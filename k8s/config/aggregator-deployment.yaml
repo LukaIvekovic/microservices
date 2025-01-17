@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aggregator-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aggregator-service
+  template:
+    metadata:
+      labels:
+        app: aggregator-service
+    spec:
+      containers:
+        - name: aggregator-service
+          image: aggregator-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config/application.properties
+              subPath: application.properties
+      volumes:
+        - name: config-volume
+          configMap:
+            name: aggregator-config

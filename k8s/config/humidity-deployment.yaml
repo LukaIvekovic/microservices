@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: humidity-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: humidity-service
+  template:
+    metadata:
+      labels:
+        app: humidity-service
+    spec:
+      containers:
+        - name: humidity-service
+          image: humidity-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
