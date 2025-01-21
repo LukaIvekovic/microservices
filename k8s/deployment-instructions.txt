@@ -42,3 +42,10 @@ Očekivani rezultat:
         "unit": "C"
     }
 ]
+
+6. Nakon promjena u config mapi, aplikacija sa novim postavkama moze se dici pomocu sljedecih naredbi:
+-> Postavljanje nove konfiguracije
+kubectl apply -f k8s/config/aggregator-config.yaml
+
+-> Brisanje starog poda nakon cega se automatski pokrece novi
+kubectl delete pod -l app=aggregator-service
